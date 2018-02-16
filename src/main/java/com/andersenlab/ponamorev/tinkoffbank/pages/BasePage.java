@@ -38,7 +38,7 @@ public class BasePage extends PageObject {
         paymentsButton.click();
     }
 
-    public void initElements() {
+    void initElements() {
         PageFactory.initElements(BaseTest.getDriver(), this);
     }
 }

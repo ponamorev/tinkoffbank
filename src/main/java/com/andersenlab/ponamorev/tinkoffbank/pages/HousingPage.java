@@ -20,17 +20,14 @@ public class HousingPage extends BasePage {
         return cityName.getText().equals(expectedCity.getOfCity());
     }
 
-    public void choseCity(ExpectedCitiesData expectedCity) {
+    public void clickChosenCity() {
+        city.click();
+    }
+
+    public boolean isChosenCityEnabled(ExpectedCitiesData expectedCity) {
         city = BaseTest.getDriver().findElement(By.xpath(String.format(choosingCitySelector, expectedCity.getCity())));
         initElements();
-    }
-
-    public boolean isChosenCityEnabled() {
         return city.isEnabled();
-    }
-
-    public void clickCity() {
-        city.click();
     }
 
     public boolean isFirstHousingSameAs(HousingsData housing) {

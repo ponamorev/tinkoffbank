@@ -7,10 +7,6 @@ public class HousingInMoscowPage extends BasePage {
     @FindBy(xpath = "//*[text()='Оплатить ЖКУ в Москве']")
     private WebElement payHousingInMoscowTab;
 
-    public boolean isPayHousingInMoscowTabEnabled() {
-        return payHousingInMoscowTab.isEnabled();
-    }
-
     public void clickPayHousingInMoscowTab() {
         payHousingInMoscowTab.click();
     }

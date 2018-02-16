@@ -9,28 +9,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    private static WebDriver webDriver;
-
-    public static WebDriver getDriver() {
-        if (webDriver == null) {
-            webDriver = new ChromeDriver();
-        }
-        return webDriver;
-    }
+    @Managed
+    public static WebDriver driver;
 
     @BeforeClass
     public static void setUp() {
-        if (webDriver == null) {
-            webDriver = new ChromeDriver();
-            webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-            webDriver.manage().window().maximize();
-            webDriver.get("https://www.tinkoff.ru");
+        if (driver == null) {
+            driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            driver.manage().window().maximize();
         }
     }
 
     @AfterClass
     public static void tearDown() {
-        if (webDriver != null)
-            webDriver.quit();
+        if (driver != null)
+            driver.quit();
     }
 }
