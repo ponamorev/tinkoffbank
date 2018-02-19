@@ -5,7 +5,7 @@ import com.andersenlab.ponamorev.tinkoffbank.data.HousingsData;
 import com.andersenlab.ponamorev.tinkoffbank.pages.HousingPage;
 import net.thucydides.core.annotations.Step;
 
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 public class HousingSteps extends BaseSteps {
 
@@ -13,8 +13,8 @@ public class HousingSteps extends BaseSteps {
 
     @Step("Название города должно быть <{0}>")
     public void cityNameShouldBeSameAs(ExpectedCitiesData expectedCity) {
-        assertTrue("Название города не совпадает с <{0}>",
-                housingPage.isCityNameSameAs(expectedCity));
+        assertTrue(housingPage.isCityNameSameAs(expectedCity),
+                "Название города не совпадает с <{0}>");
     }
 
     @Step("Проверяется город")
@@ -36,14 +36,14 @@ public class HousingSteps extends BaseSteps {
 
     @Step("Проверяется, что город <{0}> доступен")
     private void cityShouldBeEnabled(ExpectedCitiesData expectedCity) {
-        assertTrue("Город <{0}> не доступен",
-                housingPage.isChosenCityEnabled(expectedCity));
+        assertTrue(housingPage.isChosenCityEnabled(expectedCity),
+                "Город <{0}> не доступен");
     }
 
     @Step("Проверяется, что имя первой организации в списке <{0}>")
     public void firstHousingShouldBeSameAs(HousingsData housing) {
-        assertTrue("Имя первой организации не <{0}>",
-                housingPage.isFirstHousingSameAs(housing));
+        assertTrue(housingPage.isFirstHousingSameAs(housing),
+                "Имя первой организации не <{0}>");
     }
 
     @Step("Получить название первой организации в списке")

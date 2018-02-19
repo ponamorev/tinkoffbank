@@ -3,12 +3,12 @@ package com.andersenlab.ponamorev.tinkoffbank.pages;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 
-public class PayHousingInMoscowPage {
+public class PayHousingInMoscowPage extends BasePage {
     @FindBy(name = "provider-payerCode")
     private WebElement payerCodeField;
     @FindBy(id = "period")
     private WebElement periodField;
-    @FindBy(css = ".Input__wrapper_1A9vy:last-child")
+    @FindBy(css = ".Input__wrapper_1A9vy:last-child *[type='text']")
     private WebElement sumField;
 
     public boolean isPayerCodeFieldEnabled() {
@@ -16,11 +16,8 @@ public class PayHousingInMoscowPage {
     }
 
     public void clearPayerCodeField() {
-        payerCodeField.clear();
-    }
-
-    public void clickPayerCodeField() {
-        payerCodeField.click();
+        if (!payerCodeField.getAttribute("value").equals(""))
+            payerCodeField.clear();
     }
 
     public boolean isPeriodFieldEnabled() {
@@ -28,11 +25,8 @@ public class PayHousingInMoscowPage {
     }
 
     public void clearPeriodField() {
-        periodField.clear();
-    }
-
-    public void clickPeriodField() {
-        periodField.click();
+        if (!periodField.getAttribute("value").equals(""))
+            periodField.clear();
     }
 
     public boolean isSumFieldEnabled() {
@@ -40,10 +34,23 @@ public class PayHousingInMoscowPage {
     }
 
     public void clearSumField() {
-        sumField.clear();
+        if (!sumField.getAttribute("value").equals(""))
+            sumField.clear();
     }
 
-    public void clickSumField() {
-        sumField.click();
+    public void enterPayerCode(String code) {
+        payerCodeField.sendKeys(code);
+    }
+
+    public void enterPeriod(String period) {
+        periodField.sendKeys(period);
+    }
+
+    public void enterSum(String sum) {
+        sumField.sendKeys(sum);
+    }
+
+    public void refreshPage() {
+        getDriver().navigate().refresh();
     }
 }

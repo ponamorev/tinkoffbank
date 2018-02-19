@@ -4,7 +4,7 @@ import com.andersenlab.ponamorev.tinkoffbank.pages.BasePage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 public class BaseSteps extends ScenarioSteps {
 
@@ -22,8 +22,8 @@ public class BaseSteps extends ScenarioSteps {
 
     @Step("Проверяется, что кнопка <Платежи> доступна")
     public void paymentsButtonShouldBeEnabled() {
-        assertTrue("Кнопка <Платежи> не доступна",
-                basePage.isPaymentsButtonEnabled());
+        assertTrue(basePage.isPaymentsButtonEnabled(),
+                "Кнопка <Платежи> не доступна");
     }
 
     @Step("Нажимается кнопка <Платежи>")
