@@ -1,12 +1,11 @@
 package com.andersenlab.ponamorev.tinkoffbank.steps;
 
 import com.andersenlab.ponamorev.tinkoffbank.pages.BasePage;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import io.qameta.allure.Step;
 
 import static org.testng.Assert.assertTrue;
 
-public class BaseSteps extends ScenarioSteps {
+public class BaseSteps {
 
     BasePage basePage = new BasePage();
 

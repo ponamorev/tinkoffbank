@@ -1,7 +1,7 @@
 package com.andersenlab.ponamorev.tinkoffbank.steps;
 
 import com.andersenlab.ponamorev.tinkoffbank.pages.PaymentsPage;
-import net.thucydides.core.annotations.Step;
+import io.qameta.allure.Step;
 
 import static org.testng.Assert.assertTrue;
 

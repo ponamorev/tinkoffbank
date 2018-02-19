@@ -1,7 +1,8 @@
 package com.andersenlab.ponamorev.tinkoffbank.steps;
 
+import com.andersenlab.ponamorev.tinkoffbank.data.AccordingErrorMessageByNumber;
 import com.andersenlab.ponamorev.tinkoffbank.pages.PayHousingInMoscowPage;
-import net.thucydides.core.annotations.Step;
+import io.qameta.allure.Step;
 
 import static org.testng.Assert.assertTrue;
 
@@ -60,5 +61,40 @@ public class PayHousingInMoscowSteps extends BaseSteps {
     @Step("Обновление страницы")
     public void refresh() {
         payHousingInMoscowPage.refreshPage();
+    }
+
+    @Step("Нажимается кнопка <Оплатить ЖКУ в Москве>")
+    public void clickSubmitButton() {
+        payHousingInMoscowPage.clickSubmit();
+    }
+
+    @Step("Проверяется, что под полем <{0}> отображается сообщение об ошибке")
+    public void errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber number) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageDisplayed(number),
+                "Сообщение об ошибке под полем <{0}> не отображается");
+    }
+
+    @Step("Проверяется, что под полем <{0}> отображается сообщение о некорректном вводе данных")
+    public void errorMessageAboutInvalidDataShouldBeCorrect(AccordingErrorMessageByNumber number) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageCorrect(number),
+                "Сообщение о некорректном вводе данных под полем <{0}> не отображается");
+    }
+
+    @Step("Проверяется, что под полем <{0}> отображается сообщение о пустом обязательном поле")
+    public void errorMessageAboutEmptyFieldShouldBeCorrect(AccordingErrorMessageByNumber number) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutEmptyFieldCorrect(number),
+                "Сообщение о пустом обязательном поле под полем <{0}> не отображается");
+    }
+
+    @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о минимальной сумме перевода")
+    public void errorMessageAboutMinValueShouldBeCorrect(AccordingErrorMessageByNumber number) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMinValueCorrect(number),
+                "Сообщение о минимальной сумме перевода не отображается");
+    }
+
+    @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о максимальной сумме перевода")
+    public void errorMessageAboutMaxValueShouldBeCorrect(AccordingErrorMessageByNumber number) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMaxValueCorrect(number),
+                "Сообщение о максимальной сумме перевода не отображается");
     }
 }

@@ -3,3 +3,4 @@ tinkoffbank.iml
 target
 .idea
 *.log
+allure-results

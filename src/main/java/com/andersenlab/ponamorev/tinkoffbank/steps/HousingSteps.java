@@ -3,7 +3,7 @@ package com.andersenlab.ponamorev.tinkoffbank.steps;
 import com.andersenlab.ponamorev.tinkoffbank.data.ExpectedCitiesData;
 import com.andersenlab.ponamorev.tinkoffbank.data.HousingsData;
 import com.andersenlab.ponamorev.tinkoffbank.pages.HousingPage;
-import net.thucydides.core.annotations.Step;
+import io.qameta.allure.Step;
 
 import static org.testng.Assert.assertTrue;
 
