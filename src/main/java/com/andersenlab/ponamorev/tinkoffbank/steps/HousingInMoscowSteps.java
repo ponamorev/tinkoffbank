@@ -5,7 +5,7 @@ import net.thucydides.core.annotations.Step;
 
 public class HousingInMoscowSteps extends BaseSteps {
 
-    HousingInMoscowPage housingInMoscowPage;
+    HousingInMoscowPage housingInMoscowPage = new HousingInMoscowPage();
 
     @Step("Нажимается вкладка <Оплатить ЖКУ в Москве>")
     public void clickPayHousingInMoscow() {

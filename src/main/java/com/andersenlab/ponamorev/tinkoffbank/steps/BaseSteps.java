@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 
 public class BaseSteps extends ScenarioSteps {
 
-    BasePage basePage;
+    BasePage basePage = new BasePage();
 
     @Step("Открывается стартовая страница")
     public void openBasePage() {

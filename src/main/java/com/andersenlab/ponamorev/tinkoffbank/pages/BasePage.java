@@ -1,7 +1,6 @@
 package com.andersenlab.ponamorev.tinkoffbank.pages;
 
-import net.thucydides.core.annotations.DefaultUrl;
-import net.thucydides.core.pages.PageObject;
+import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,9 +10,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@DefaultUrl("https://www.tinkoff.ru")
-public class BasePage extends PageObject {
-    protected static final Logger logger = LoggerFactory.getLogger(BasePage.class);
+public class BasePage {
+    private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
+    String defaultUrl = "https://www.tinkoff.ru";
+
+    public BasePage() { initElements(); }
 
     @FindBy(css = "*[href='/payments/'] *[data-qa-file='MenuItem']")
     private WebElement paymentsButton;
@@ -22,9 +23,9 @@ public class BasePage extends PageObject {
         ExpectedCondition<Boolean> pageReadyStateIsCompleted =
                 (webdriver -> ((JavascriptExecutor) webdriver).executeScript("return document.readyState").equals("complete"));
         try {
-            new WebDriverWait(getDriver(), 5).until(pageReadyStateIsCompleted);
+            new WebDriverWait(BaseTest.driver, 5).until(pageReadyStateIsCompleted);
         } catch (Exception e) {
-            logger.error(String.format("Страница \"%s\" не загрузилась", getDriver().getTitle()));
+            logger.error(String.format("Страница \"%s\" не загрузилась", BaseTest.driver.getTitle()));
         }
         initElements();
     }
@@ -37,7 +38,11 @@ public class BasePage extends PageObject {
         paymentsButton.click();
     }
 
-    private void initElements() {
-        PageFactory.initElements(getDriver(), this);
+    public void initElements() {
+        PageFactory.initElements(BaseTest.driver, this);
+    }
+
+    public void open() {
+        BaseTest.driver.get(defaultUrl);
     }
 }

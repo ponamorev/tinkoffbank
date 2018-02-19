@@ -7,7 +7,7 @@ import static org.testng.Assert.assertTrue;
 
 public class PayHousingInMoscowSteps extends BaseSteps {
 
-    PayHousingInMoscowPage payHousingInMoscowPage;
+    PayHousingInMoscowPage payHousingInMoscowPage = new PayHousingInMoscowPage();
 
     @Step("Проверяется, что поле для ввода кода плательщика доступно")
     public void payerCodeFieldShouldBeEnabled() {

@@ -1,10 +1,13 @@
 package com.andersenlab.ponamorev.tinkoffbank.pages;
 
+import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import com.andersenlab.ponamorev.tinkoffbank.data.ExpectedCitiesData;
 import com.andersenlab.ponamorev.tinkoffbank.data.HousingsData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HousingPage extends BasePage {
     private final String choosingCitySelector = "//*[text()='%s']/..";
@@ -16,6 +19,7 @@ public class HousingPage extends BasePage {
     private WebElement firstHousing;
 
     public boolean isCityNameSameAs(ExpectedCitiesData expectedCity) {
+        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(cityName));
         return cityName.getText().equals(expectedCity.getOfCity());
     }
 
@@ -24,7 +28,7 @@ public class HousingPage extends BasePage {
     }
 
     public boolean isChosenCityEnabled(ExpectedCitiesData expectedCity) {
-        city = getDriver().findElement(By.xpath(String.format(choosingCitySelector, expectedCity.getCity())));
+        city = BaseTest.driver.findElement(By.xpath(String.format(choosingCitySelector, expectedCity.getCity())));
         return city.isEnabled();
     }
 
@@ -41,6 +45,7 @@ public class HousingPage extends BasePage {
     }
 
     public void clickCityName() {
+        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(cityName));
         cityName.click();
     }
 }

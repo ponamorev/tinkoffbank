@@ -1,13 +1,11 @@
 package com.andersenlab.ponamorev.tinkoffbank;
 
 import com.andersenlab.ponamorev.tinkoffbank.steps.PayHousingInMoscowSteps;
-import net.thucydides.core.annotations.Steps;
-import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class CheckingValuesTest extends BaseTest {
-    @Steps
-    PayHousingInMoscowSteps payHousingInMoscowSteps;
+    PayHousingInMoscowSteps payHousingInMoscowSteps = new PayHousingInMoscowSteps();
 
     @DataProvider
     static Object[][] data() {
@@ -30,10 +28,23 @@ public class CheckingValuesTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "data")
+    @Test(dataProvider = "data", groups = "main_group")
     public void checking_values_test(String code,
                                      String period,
                                      String sum) {
+        payHousingInMoscowSteps.waitUntilPageIsLoaded();
+        payHousingInMoscowSteps.payerCodeFieldShouldBeEnabled();
+        payHousingInMoscowSteps.clearPayerCodeField();
+        payHousingInMoscowSteps.enterPayerCode(code);
 
+        payHousingInMoscowSteps.periodFieldShouldBeEnabled();
+        payHousingInMoscowSteps.clearPeriodField();
+        payHousingInMoscowSteps.enterPeriod(period);
+
+        payHousingInMoscowSteps.sumFieldShouldBeEnabled();
+        payHousingInMoscowSteps.clearSumField();
+        payHousingInMoscowSteps.enterSum(sum);
+
+        payHousingInMoscowSteps.refresh();
     }
 }

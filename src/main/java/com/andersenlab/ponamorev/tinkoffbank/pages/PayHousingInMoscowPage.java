@@ -1,5 +1,6 @@
 package com.andersenlab.ponamorev.tinkoffbank.pages;
 
+import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;
 
@@ -51,6 +52,6 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     public void refreshPage() {
-        getDriver().navigate().refresh();
+        BaseTest.driver.navigate().refresh();
     }
 }

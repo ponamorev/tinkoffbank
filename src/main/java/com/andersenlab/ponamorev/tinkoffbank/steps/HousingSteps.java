@@ -9,10 +9,10 @@ import static org.testng.Assert.assertTrue;
 
 public class HousingSteps extends BaseSteps {
 
-    HousingPage housingPage;
+    HousingPage housingPage = new HousingPage();
 
     @Step("Название города должно быть <{0}>")
-    public void cityNameShouldBeSameAs(ExpectedCitiesData expectedCity) {
+    private void cityNameShouldBeSameAs(ExpectedCitiesData expectedCity) {
         assertTrue(housingPage.isCityNameSameAs(expectedCity),
                 "Название города не совпадает с <{0}>");
     }

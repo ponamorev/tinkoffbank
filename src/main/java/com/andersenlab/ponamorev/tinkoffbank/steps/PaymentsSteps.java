@@ -7,7 +7,7 @@ import static org.testng.Assert.assertTrue;
 
 public class PaymentsSteps extends BaseSteps {
 
-    PaymentsPage paymentsPage;
+    PaymentsPage paymentsPage = new PaymentsPage();
 
     @Step("Проверяется, что кнопка <ЖКУ> доступна")
     public void housingButtonShouldBeEnabled() {

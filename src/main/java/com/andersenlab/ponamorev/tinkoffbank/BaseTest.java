@@ -1,15 +1,14 @@
 package com.andersenlab.ponamorev.tinkoffbank;
 
-import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeSuite;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    @Managed(driver = "chrome")
-    public static WebDriver driver;
+    public static final WebDriver driver = new ChromeDriver();
 
     @BeforeSuite
     public void setUp() {
@@ -19,7 +18,6 @@ public class BaseTest {
 
     @AfterSuite
     public void tearDown() {
-        if (driver != null)
-            driver.quit();
+        driver.quit();
     }
 }
