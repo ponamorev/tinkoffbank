@@ -19,4 +19,9 @@ public enum ExpectedCitiesData {
     public String getOfCity() {
         return ofCity;
     }
+
+    @Override
+    public String toString() {
+        return getCity() + " или " + getOfCity();
+    }
 }

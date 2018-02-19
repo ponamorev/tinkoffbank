@@ -2,3 +2,4 @@
 tinkoffbank.iml
 target
 .idea
+*.log

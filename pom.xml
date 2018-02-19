@@ -13,14 +13,11 @@
         <selenium.version>3.9.1</selenium.version>
         <project.compiler.version>1.8</project.compiler.version>
         <project.compiler.encoding>UTF-8</project.compiler.encoding>
+
+        <webdriver.driver>chrome</webdriver.driver>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>core</artifactId>
-            <version>1.0.47</version>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -50,7 +47,16 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-junit</artifactId>
             <version>${serenity.version}</version>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.14.2</version>
         </dependency>
     </dependencies>
 

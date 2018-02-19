@@ -12,4 +12,9 @@ public enum HousingsData {
     public String getHousing() {
         return housing;
     }
+
+    @Override
+    public String toString() {
+        return getHousing();
+    }
 }

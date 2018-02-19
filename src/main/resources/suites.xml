@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Tinkoff bank test suite">
+    <test name="Check invalid values">
+        <classes>
+            <class name="com.andersenlab.ponamorev.tinkoffbank.TinkoffBankChoosingHousingTest"/>
+            <class name="com.andersenlab.ponamorev.tinkoffbank.CheckingValuesTest"/>
+            <class name="com.andersenlab.ponamorev.tinkoffbank.TinkoffBankChangingCityTest"/>
+        </classes>
+    </test>
+</suite>

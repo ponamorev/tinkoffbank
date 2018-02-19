@@ -17,13 +17,25 @@ public class HousingSteps extends BaseSteps {
                 housingPage.isCityNameSameAs(expectedCity));
     }
 
+    @Step("Проверяется город")
+    public void cityChecking(ExpectedCitiesData expectedCity) {
+        if (housingPage.isCityNameSameAs(expectedCity))
+            cityShouldBeEnabled(expectedCity);
+        else {
+            clickCityName();
+            cityShouldBeEnabled(expectedCity);
+            clickChosenCity();
+            cityNameShouldBeSameAs(expectedCity);
+        }
+    }
+
     @Step("Нажимается выбранный город")
-    public void clickChosenCity() {
+    private void clickChosenCity() {
         housingPage.clickChosenCity();
     }
 
     @Step("Проверяется, что город <{0}> доступен")
-    public void cityShouldBeEnabled(ExpectedCitiesData expectedCity) {
+    private void cityShouldBeEnabled(ExpectedCitiesData expectedCity) {
         assertTrue("Город <{0}> не доступен",
                 housingPage.isChosenCityEnabled(expectedCity));
     }
@@ -45,7 +57,7 @@ public class HousingSteps extends BaseSteps {
     }
 
     @Step("Нажимается название города для открытия страницы выбора города")
-    public void clickCityName() {
+    private void clickCityName() {
         housingPage.clickCityName();
     }
 }

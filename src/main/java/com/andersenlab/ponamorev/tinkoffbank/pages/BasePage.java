@@ -1,11 +1,10 @@
 package com.andersenlab.ponamorev.tinkoffbank.pages;
 
-import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
-import org.openqa.selenium.support.FindBy;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,9 +22,9 @@ public class BasePage extends PageObject {
         ExpectedCondition<Boolean> pageReadyStateIsCompleted =
                 (webdriver -> ((JavascriptExecutor) webdriver).executeScript("return document.readyState").equals("complete"));
         try {
-            new WebDriverWait(BaseTest.getDriver(), 5).until(pageReadyStateIsCompleted);
+            new WebDriverWait(getDriver(), 5).until(pageReadyStateIsCompleted);
         } catch (Exception e) {
-            logger.error(String.format("Страница \"%s\" не загрузилась", BaseTest.getDriver().getTitle()));
+            logger.error(String.format("Страница \"%s\" не загрузилась", getDriver().getTitle()));
         }
         initElements();
     }
@@ -38,7 +37,7 @@ public class BasePage extends PageObject {
         paymentsButton.click();
     }
 
-    void initElements() {
-        PageFactory.initElements(BaseTest.getDriver(), this);
+    private void initElements() {
+        PageFactory.initElements(getDriver(), this);
     }
 }
