@@ -1,27 +1,30 @@
 package com.andersenlab.ponamorev.tinkoffbank.data;
 
 public enum AccordingErrorMessageByNumber {
-    PAYER_CODE("Поле неправильно заполнено", "Поле обязательное", "Код плательщика ЖКУ в Москве", 1),
-    PERIOD("Поле заполнено некорректно", "Поле обязательное", "Период оплаты", 2),
-    SUM("Поле заполнено неверно", "Поле обязательное", "Сумма платежа", 3);
+    PAYER_CODE("Поле неправильно заполнено", "Поле обязательное", "Код плательщика ЖКУ в Москве",
+            ".ui-form__row_text.ui-form__row_default-error-view-visible"),
+    PERIOD("Поле заполнено некорректно", "Поле обязательное", "Период оплаты",
+            ".ui-form__row_date"),
+    SUM("Поле заполнено неверно", "Поле обязательное", "Сумма платежа",
+            ".ui-form__row_combination");
 
     private String invalidValueMessage;
     private String emptyFieldMessage;
     private String fieldName;
-    private int number;
+    private String cssParent;
 
     AccordingErrorMessageByNumber(String invalidValueMessage,
                                   String emptyFieldMessage,
                                   String fieldName,
-                                  int number) {
+                                  String cssParent) {
         this.invalidValueMessage = invalidValueMessage;
         this.emptyFieldMessage = emptyFieldMessage;
         this.fieldName = fieldName;
-        this.number = number;
+        this.cssParent = cssParent;
     }
 
-    public int getNumber() {
-        return number;
+    public String getCssParent() {
+        return cssParent;
     }
 
     public String getInvalidValueMessage() {

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PayHousingInMoscowPage extends BasePage {
-    private String errorMessageXpath = "(//*[@data-qa-file='UIFormRowError'])[%s]";
+    private String errorMessageCss = "%s *[data-qa-file='UIFormRowError']";
     private String messageAboutMinValue = "Минимальная сумма перевода - 10 \u20BD";
     private String messageAboutMaxValue = "Максимальная сумма перевода - 15 000 \u20BD";
     private WebElement errorMessage;
@@ -46,7 +46,6 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     public void clearSumField() {
-        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(sumField));
         if (!sumField.getAttribute("value").equals(""))
             sumField.clear();
     }
@@ -68,34 +67,36 @@ public class PayHousingInMoscowPage extends BasePage {
         BaseTest.driver.navigate().refresh();
     }
 
-    private WebElement getErrorMessageByField(AccordingErrorMessageByNumber number) {
-        errorMessage = BaseTest.driver.findElement(By.xpath(String.format(
-                errorMessageXpath, number.getNumber())));
+    private WebElement getErrorMessageByField(AccordingErrorMessageByNumber message) {
+        errorMessage = BaseTest.driver.findElement(By.cssSelector(String.format(
+                errorMessageCss, message.getCssParent())));
+        initElements();
         new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(errorMessage));
         return errorMessage;
     }
 
-    public boolean isErrorMessageCorrect(AccordingErrorMessageByNumber number) {
-        return getErrorMessageByField(number).getText().equals(number.getInvalidValueMessage());
+    public boolean isErrorMessageCorrect(AccordingErrorMessageByNumber message) {
+        return getErrorMessageByField(message).getText().equals(message.getInvalidValueMessage());
     }
 
-    public boolean isErrorMessageAboutEmptyFieldCorrect(AccordingErrorMessageByNumber number) {
-        return getErrorMessageByField(number).getText().equals(number.getEmptyFieldMessage());
+    public boolean isErrorMessageAboutEmptyFieldCorrect(AccordingErrorMessageByNumber message) {
+        return getErrorMessageByField(message).getText().equals(message.getEmptyFieldMessage());
     }
 
-    public boolean isErrorMessageDisplayed(AccordingErrorMessageByNumber number) {
-        return getErrorMessageByField(number).isDisplayed();
+    public boolean isErrorMessageDisplayed(AccordingErrorMessageByNumber message) {
+        return getErrorMessageByField(message).isDisplayed();
     }
 
-    public boolean isErrorMessageAboutMinValueCorrect(AccordingErrorMessageByNumber number) {
-        return getErrorMessageByField(number).getText().equals(messageAboutMinValue);
+    public boolean isErrorMessageAboutMinValueCorrect(AccordingErrorMessageByNumber message) {
+        return getErrorMessageByField(message).getText().equals(messageAboutMinValue);
     }
 
-    public boolean isErrorMessageAboutMaxValueCorrect(AccordingErrorMessageByNumber number) {
-        return getErrorMessageByField(number).getText().equals(messageAboutMaxValue);
+    public boolean isErrorMessageAboutMaxValueCorrect(AccordingErrorMessageByNumber message) {
+        return getErrorMessageByField(message).getText().equals(messageAboutMaxValue);
     }
 
     public void clickSubmit() {
+        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(submitButton));
         submitButton.click();
     }
 }

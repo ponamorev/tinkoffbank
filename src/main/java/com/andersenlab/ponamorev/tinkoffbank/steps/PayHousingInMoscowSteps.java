@@ -69,32 +69,32 @@ public class PayHousingInMoscowSteps extends BaseSteps {
     }
 
     @Step("Проверяется, что под полем <{0}> отображается сообщение об ошибке")
-    public void errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber number) {
-        assertTrue(payHousingInMoscowPage.isErrorMessageDisplayed(number),
+    public void errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber message) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageDisplayed(message),
                 "Сообщение об ошибке под полем <{0}> не отображается");
     }
 
     @Step("Проверяется, что под полем <{0}> отображается сообщение о некорректном вводе данных")
-    public void errorMessageAboutInvalidDataShouldBeCorrect(AccordingErrorMessageByNumber number) {
-        assertTrue(payHousingInMoscowPage.isErrorMessageCorrect(number),
+    public void errorMessageAboutInvalidDataShouldBeCorrect(AccordingErrorMessageByNumber message) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageCorrect(message),
                 "Сообщение о некорректном вводе данных под полем <{0}> не отображается");
     }
 
     @Step("Проверяется, что под полем <{0}> отображается сообщение о пустом обязательном поле")
-    public void errorMessageAboutEmptyFieldShouldBeCorrect(AccordingErrorMessageByNumber number) {
-        assertTrue(payHousingInMoscowPage.isErrorMessageAboutEmptyFieldCorrect(number),
+    public void errorMessageAboutEmptyFieldShouldBeCorrect(AccordingErrorMessageByNumber message) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutEmptyFieldCorrect(message),
                 "Сообщение о пустом обязательном поле под полем <{0}> не отображается");
     }
 
     @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о минимальной сумме перевода")
-    public void errorMessageAboutMinValueShouldBeCorrect(AccordingErrorMessageByNumber number) {
-        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMinValueCorrect(number),
+    public void errorMessageAboutMinValueShouldBeCorrect(AccordingErrorMessageByNumber message) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMinValueCorrect(message),
                 "Сообщение о минимальной сумме перевода не отображается");
     }
 
     @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о максимальной сумме перевода")
-    public void errorMessageAboutMaxValueShouldBeCorrect(AccordingErrorMessageByNumber number) {
-        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMaxValueCorrect(number),
+    public void errorMessageAboutMaxValueShouldBeCorrect(AccordingErrorMessageByNumber message) {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMaxValueCorrect(message),
                 "Сообщение о максимальной сумме перевода не отображается");
     }
 }
