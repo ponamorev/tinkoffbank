@@ -2,6 +2,7 @@ package com.andersenlab.ponamorev.tinkoffbank.pages;
 
 import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,7 +15,9 @@ public class BasePage {
     private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
     String defaultUrl = "https://www.tinkoff.ru";
 
-    public BasePage() { initElements(this); }
+    public BasePage(WebDriver driver, Class<? extends BasePage> pageClass) {
+        PageFactory.initElements(driver, pageClass);
+    }
 
     @FindBy(css = "*[href='/payments/'] *[data-qa-file='MenuItem']")
     private WebElement paymentsButton;
@@ -27,7 +30,6 @@ public class BasePage {
         } catch (Exception e) {
             logger.error(String.format("Страница \"%s\" не загрузилась", BaseTest.driver.getTitle()));
         }
-        initElements(this);
     }
 
     public boolean isPaymentsButtonEnabled() {
@@ -38,15 +40,13 @@ public class BasePage {
         paymentsButton.click();
     }
 
-    void initElements(BasePage pageForInitElements) {
-        PageFactory.initElements(BaseTest.driver, pageForInitElements);
-    }
-
     public void open() {
         BaseTest.driver.get(defaultUrl);
     }
 
     void waitUntilElementIsPresentAndVisible(WebElement element) {
-        StaleTolerantWebDriver
+        if (!element.isDisplayed()) {
+
+        }
     }
 }

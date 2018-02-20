@@ -1,5 +1,6 @@
 package com.andersenlab.ponamorev.tinkoffbank.steps;
 
+import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import com.andersenlab.ponamorev.tinkoffbank.pages.BasePage;
 import io.qameta.allure.Step;
 
@@ -7,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 
 public class BaseSteps {
 
-    BasePage basePage = new BasePage();
+    BasePage basePage = new BasePage(BaseTest.driver, BasePage.class);
 
     @Step("Открывается стартовая страница")
     public void openBasePage() {

@@ -4,6 +4,7 @@ import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import com.andersenlab.ponamorev.tinkoffbank.data.AccordingErrorMessageByNumber;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,6 +28,10 @@ public class PayHousingInMoscowPage extends BasePage {
     private WebElement periodErrorMessage;
     @FindBy(css = ".ui-form__row_combination *[data-qa-file='UIFormRowError']")
     private WebElement sumErrorMessage;
+
+    public PayHousingInMoscowPage() {
+        super(BaseTest.driver, PayHousingInMoscowPage.class);
+    }
 
     public boolean isPayerCodeFieldEnabled() {
         return payerCodeField.isEnabled();
@@ -60,7 +65,7 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     public void enterPayerCode(String code) {
-        initElements(this);
+        PageFactory.initElements(BaseTest.driver, PayHousingInMoscowPage.class);
         new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(payerCodeField));
         payerCodeField.sendKeys(code);
     }
@@ -102,12 +107,12 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     public boolean isErrorMessageAboutMinValueCorrect() {
-        initElements(this);
+        PageFactory.initElements(BaseTest.driver, PayHousingInMoscowPage.class);
         return sumErrorMessage.getText().equals(messageAboutMinValue);
     }
 
     public boolean isErrorMessageAboutMaxValueCorrect() {
-        initElements(this);
+        PageFactory.initElements(BaseTest.driver, PayHousingInMoscowPage.class);
         /*new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf())*/
         return sumErrorMessage.getText().equals(messageAboutMaxValue);
     }
