@@ -14,7 +14,7 @@ public class BasePage {
     private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
     String defaultUrl = "https://www.tinkoff.ru";
 
-    public BasePage() { initElements(); }
+    public BasePage() { initElements(this); }
 
     @FindBy(css = "*[href='/payments/'] *[data-qa-file='MenuItem']")
     private WebElement paymentsButton;
@@ -27,7 +27,7 @@ public class BasePage {
         } catch (Exception e) {
             logger.error(String.format("Страница \"%s\" не загрузилась", BaseTest.driver.getTitle()));
         }
-        initElements();
+        initElements(this);
     }
 
     public boolean isPaymentsButtonEnabled() {
@@ -38,11 +38,15 @@ public class BasePage {
         paymentsButton.click();
     }
 
-    public void initElements() {
-        PageFactory.initElements(BaseTest.driver, this);
+    void initElements(BasePage pageForInitElements) {
+        PageFactory.initElements(BaseTest.driver, pageForInitElements);
     }
 
     public void open() {
         BaseTest.driver.get(defaultUrl);
+    }
+
+    void waitUntilElementIsPresentAndVisible(WebElement element) {
+        StaleTolerantWebDriver
     }
 }

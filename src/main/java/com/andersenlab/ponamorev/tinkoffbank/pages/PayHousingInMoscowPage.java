@@ -2,17 +2,16 @@ package com.andersenlab.ponamorev.tinkoffbank.pages;
 
 import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import com.andersenlab.ponamorev.tinkoffbank.data.AccordingErrorMessageByNumber;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PayHousingInMoscowPage extends BasePage {
-    private String errorMessageCss = "%s *[data-qa-file='UIFormRowError']";
+    /*private String errorMessageCss = "%s *[data-qa-file='UIFormRowError']";*/
     private String messageAboutMinValue = "Минимальная сумма перевода - 10 \u20BD";
     private String messageAboutMaxValue = "Максимальная сумма перевода - 15 000 \u20BD";
-    private WebElement errorMessage;
+    /*private WebElement errorMessage;*/
 
     @FindBy(name = "provider-payerCode")
     private WebElement payerCodeField;
@@ -22,6 +21,12 @@ public class PayHousingInMoscowPage extends BasePage {
     private WebElement sumField;
     @FindBy(css = ".ui-button.ui-button_failure")
     private WebElement submitButton;
+    @FindBy(css = ".ui-form__row_text.ui-form__row_default-error-view-visible *[data-qa-file='UIFormRowError']")
+    private WebElement payerCodeErrorMessage;
+    @FindBy(css = ".ui-form__row_date *[data-qa-file='UIFormRowError']")
+    private WebElement periodErrorMessage;
+    @FindBy(css = ".ui-form__row_combination *[data-qa-file='UIFormRowError']")
+    private WebElement sumErrorMessage;
 
     public boolean isPayerCodeFieldEnabled() {
         return payerCodeField.isEnabled();
@@ -30,6 +35,10 @@ public class PayHousingInMoscowPage extends BasePage {
     public void clearPayerCodeField() {
         if (!payerCodeField.getAttribute("value").equals(""))
             payerCodeField.clear();
+    }
+
+    public void clickPayerCodeField() {
+        payerCodeField.click();
     }
 
     public boolean isPeriodFieldEnabled() {
@@ -51,7 +60,8 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     public void enterPayerCode(String code) {
-        initElements();
+        initElements(this);
+        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(payerCodeField));
         payerCodeField.sendKeys(code);
     }
 
@@ -68,11 +78,15 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     private WebElement getErrorMessageByField(AccordingErrorMessageByNumber message) {
-        errorMessage = BaseTest.driver.findElement(By.cssSelector(String.format(
-                errorMessageCss, message.getCssParent())));
-        initElements();
-        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(errorMessage));
-        return errorMessage;
+        switch (message.toString()) {
+            case "Код плательщика ЖКУ в Москве":
+                return payerCodeErrorMessage;
+            case "Период оплаты":
+                return periodErrorMessage;
+            case "Сумма платежа":
+                return sumErrorMessage;
+        }
+        return null;
     }
 
     public boolean isErrorMessageCorrect(AccordingErrorMessageByNumber message) {
@@ -87,12 +101,15 @@ public class PayHousingInMoscowPage extends BasePage {
         return getErrorMessageByField(message).isDisplayed();
     }
 
-    public boolean isErrorMessageAboutMinValueCorrect(AccordingErrorMessageByNumber message) {
-        return getErrorMessageByField(message).getText().equals(messageAboutMinValue);
+    public boolean isErrorMessageAboutMinValueCorrect() {
+        initElements(this);
+        return sumErrorMessage.getText().equals(messageAboutMinValue);
     }
 
-    public boolean isErrorMessageAboutMaxValueCorrect(AccordingErrorMessageByNumber message) {
-        return getErrorMessageByField(message).getText().equals(messageAboutMaxValue);
+    public boolean isErrorMessageAboutMaxValueCorrect() {
+        initElements(this);
+        /*new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf())*/
+        return sumErrorMessage.getText().equals(messageAboutMaxValue);
     }
 
     public void clickSubmit() {

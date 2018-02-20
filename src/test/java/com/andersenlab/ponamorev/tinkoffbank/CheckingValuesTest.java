@@ -118,7 +118,7 @@ public class CheckingValuesTest extends BaseTest {
 
         payHousingInMoscowSteps.clickSubmitButton();
         payHousingInMoscowSteps.errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber.SUM);
-        payHousingInMoscowSteps.errorMessageAboutMinValueShouldBeCorrect(AccordingErrorMessageByNumber.SUM);
+        payHousingInMoscowSteps.errorMessageAboutMinValueShouldBeCorrect();
     }
 
     @Test(dataProvider = "dataForSumFieldWithMaxValue", groups = "main_group")
@@ -129,12 +129,22 @@ public class CheckingValuesTest extends BaseTest {
 
         payHousingInMoscowSteps.clickSubmitButton();
         payHousingInMoscowSteps.errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber.SUM);
-        payHousingInMoscowSteps.errorMessageAboutMaxValueShouldBeCorrect(AccordingErrorMessageByNumber.SUM);
+        payHousingInMoscowSteps.errorMessageAboutMaxValueShouldBeCorrect();
     }
 
     @Test(groups = "main_group")
     public void checking_empty_values_test() {
+        payHousingInMoscowSteps.payerCodeFieldShouldBeEnabled();
+        payHousingInMoscowSteps.enterPayerCode("12");
+        payHousingInMoscowSteps.periodFieldShouldBeEnabled();
+        payHousingInMoscowSteps.enterPeriod("12");
+        payHousingInMoscowSteps.sumFieldShouldBeEnabled();
+        payHousingInMoscowSteps.enterSum("12");
+        payHousingInMoscowSteps.clearPayerCodeField();
+        payHousingInMoscowSteps.clearPeriodField();
+        payHousingInMoscowSteps.clearSumField();
         payHousingInMoscowSteps.clickSubmitButton();
+
         payHousingInMoscowSteps.errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber.PAYER_CODE);
         payHousingInMoscowSteps.errorMessageAboutEmptyFieldShouldBeCorrect(AccordingErrorMessageByNumber.PAYER_CODE);
         payHousingInMoscowSteps.errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber.PERIOD);

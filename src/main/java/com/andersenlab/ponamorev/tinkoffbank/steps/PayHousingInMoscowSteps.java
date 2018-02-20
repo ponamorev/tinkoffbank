@@ -21,6 +21,11 @@ public class PayHousingInMoscowSteps extends BaseSteps {
         payHousingInMoscowPage.clearPayerCodeField();
     }
 
+    @Step("Нажимается на поле для ввода кода плательщика")
+    public void clickPayerCodeField() {
+        payHousingInMoscowPage.clickPayerCodeField();
+    }
+
     @Step("Проверяется, что поле для ввода периода оплаты доступно")
     public void periodFieldShouldBeEnabled() {
         assertTrue(payHousingInMoscowPage.isPeriodFieldEnabled(),
@@ -87,14 +92,14 @@ public class PayHousingInMoscowSteps extends BaseSteps {
     }
 
     @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о минимальной сумме перевода")
-    public void errorMessageAboutMinValueShouldBeCorrect(AccordingErrorMessageByNumber message) {
-        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMinValueCorrect(message),
+    public void errorMessageAboutMinValueShouldBeCorrect() {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMinValueCorrect(),
                 "Сообщение о минимальной сумме перевода не отображается");
     }
 
     @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о максимальной сумме перевода")
-    public void errorMessageAboutMaxValueShouldBeCorrect(AccordingErrorMessageByNumber message) {
-        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMaxValueCorrect(message),
+    public void errorMessageAboutMaxValueShouldBeCorrect() {
+        assertTrue(payHousingInMoscowPage.isErrorMessageAboutMaxValueCorrect(),
                 "Сообщение о максимальной сумме перевода не отображается");
     }
 }
