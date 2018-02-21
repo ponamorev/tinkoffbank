@@ -11,4 +11,10 @@ public class HousingInMoscowSteps extends BaseSteps {
     public void clickPayHousingInMoscow() {
         housingInMoscowPage.clickPayHousingInMoscowTab();
     }
+
+    @Override
+    @Step("Ожидается, пока страница не загрузится")
+    public void waitUntilPageIsLoaded() {
+        housingInMoscowPage.waitUntilPageIsLoaded(housingInMoscowPage);
+    }
 }

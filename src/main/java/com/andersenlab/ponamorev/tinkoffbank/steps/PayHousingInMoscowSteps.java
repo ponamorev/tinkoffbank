@@ -102,4 +102,10 @@ public class PayHousingInMoscowSteps extends BaseSteps {
         assertTrue(payHousingInMoscowPage.isErrorMessageAboutMaxValueCorrect(),
                 "Сообщение о максимальной сумме перевода не отображается");
     }
+
+    @Override
+    @Step("Ожидается, пока страница не загрузится")
+    public void waitUntilPageIsLoaded() {
+        payHousingInMoscowPage.waitUntilPageIsLoaded(payHousingInMoscowPage);
+    }
 }

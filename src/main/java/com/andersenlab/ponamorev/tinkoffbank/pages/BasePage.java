@@ -15,14 +15,14 @@ public class BasePage {
     private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
     String defaultUrl = "https://www.tinkoff.ru";
 
-    public BasePage(WebDriver driver, Class<? extends BasePage> pageClass) {
-        PageFactory.initElements(driver, pageClass);
-    }
-
     @FindBy(css = "*[href='/payments/'] *[data-qa-file='MenuItem']")
     private WebElement paymentsButton;
 
-    public void waitUntilPageIsLoaded() {
+    private void initPageElements(WebDriver driver, BasePage page) {
+        PageFactory.initElements(driver, page);
+    }
+
+    public void waitUntilPageIsLoaded(BasePage page) {
         ExpectedCondition<Boolean> pageReadyStateIsCompleted =
                 (webdriver -> ((JavascriptExecutor) webdriver).executeScript("return document.readyState").equals("complete"));
         try {
@@ -30,6 +30,7 @@ public class BasePage {
         } catch (Exception e) {
             logger.error(String.format("Страница \"%s\" не загрузилась", BaseTest.driver.getTitle()));
         }
+        initPageElements(BaseTest.driver, page);
     }
 
     public boolean isPaymentsButtonEnabled() {

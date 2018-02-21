@@ -18,10 +18,6 @@ public class HousingPage extends BasePage {
     @FindBy(css = ".ui-menu__item:first-child")
     private WebElement firstHousing;
 
-    public HousingPage() {
-        super(BaseTest.driver, HousingPage.class);
-    }
-
     public boolean isCityNameSameAs(ExpectedCitiesData expectedCity) {
         new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(cityName));
         return cityName.getText().equals(expectedCity.getOfCity());
@@ -33,6 +29,7 @@ public class HousingPage extends BasePage {
 
     public boolean isChosenCityEnabled(ExpectedCitiesData expectedCity) {
         city = BaseTest.driver.findElement(By.xpath(String.format(choosingCitySelector, expectedCity.getCity())));
+        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.elementToBeClickable(city));
         return city.isEnabled();
     }
 

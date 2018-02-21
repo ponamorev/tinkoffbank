@@ -60,4 +60,10 @@ public class HousingSteps extends BaseSteps {
     private void clickCityName() {
         housingPage.clickCityName();
     }
+
+    @Override
+    @Step("Ожидается, пока страница не загрузится")
+    public void waitUntilPageIsLoaded() {
+        housingPage.waitUntilPageIsLoaded(housingPage);
+    }
 }

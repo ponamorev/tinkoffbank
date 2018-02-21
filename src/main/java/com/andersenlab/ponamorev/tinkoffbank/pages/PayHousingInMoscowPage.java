@@ -29,10 +29,6 @@ public class PayHousingInMoscowPage extends BasePage {
     @FindBy(css = ".ui-form__row_combination *[data-qa-file='UIFormRowError']")
     private WebElement sumErrorMessage;
 
-    public PayHousingInMoscowPage() {
-        super(BaseTest.driver, PayHousingInMoscowPage.class);
-    }
-
     public boolean isPayerCodeFieldEnabled() {
         return payerCodeField.isEnabled();
     }

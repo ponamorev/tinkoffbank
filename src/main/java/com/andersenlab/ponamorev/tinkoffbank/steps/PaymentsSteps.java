@@ -19,4 +19,10 @@ public class PaymentsSteps extends BaseSteps {
     public void clickHousingButton() {
         paymentsPage.clickHousing();
     }
+
+    @Override
+    @Step("Ожидается, пока страница не загрузится")
+    public void waitUntilPageIsLoaded() {
+        paymentsPage.waitUntilPageIsLoaded(paymentsPage);
+    }
 }

@@ -1,6 +1,5 @@
 package com.andersenlab.ponamorev.tinkoffbank.steps;
 
-import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import com.andersenlab.ponamorev.tinkoffbank.pages.BasePage;
 import io.qameta.allure.Step;
 
@@ -8,7 +7,7 @@ import static org.testng.Assert.assertTrue;
 
 public class BaseSteps {
 
-    BasePage basePage = new BasePage(BaseTest.driver, BasePage.class);
+    BasePage basePage = new BasePage();
 
     @Step("Открывается стартовая страница")
     public void openBasePage() {
@@ -17,7 +16,7 @@ public class BaseSteps {
 
     @Step("Ожидается, пока страница не загрузится")
     public void waitUntilPageIsLoaded() {
-        basePage.waitUntilPageIsLoaded();
+        basePage.waitUntilPageIsLoaded(basePage);
     }
 
     @Step("Проверяется, что кнопка <Платежи> доступна")

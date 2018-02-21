@@ -134,6 +134,7 @@ public class CheckingValuesTest extends BaseTest {
 
     @Test(groups = "main_group")
     public void checking_empty_values_test() {
+        payHousingInMoscowSteps.waitUntilPageIsLoaded();
         payHousingInMoscowSteps.payerCodeFieldShouldBeEnabled();
         payHousingInMoscowSteps.enterPayerCode("12");
         payHousingInMoscowSteps.periodFieldShouldBeEnabled();
