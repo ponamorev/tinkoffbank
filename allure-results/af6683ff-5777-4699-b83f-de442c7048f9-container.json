@@ -1,0 +1,1 @@
+{"uuid":"af6683ff-5777-4699-b83f-de442c7048f9","name":"com.andersenlab.ponamorev.tinkoffbank.CheckingValuesTest.refreshPage","description":"","start":1519283088748,"stop":1519283090477,"children":["4f128e15-2a2b-4a97-bc84-166d557d3648"],"afters":[{"name":"refreshPage","status":"passed","stage":"finished","description":"","start":1519283088748,"stop":1519283090477}]}

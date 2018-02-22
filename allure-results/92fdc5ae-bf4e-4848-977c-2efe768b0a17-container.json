@@ -1,0 +1,1 @@
+{"uuid":"92fdc5ae-bf4e-4848-977c-2efe768b0a17","name":"com.andersenlab.ponamorev.tinkoffbank.TinkoffBankChangingCityTest.unset","description":"","start":1519295738832,"stop":1519295739941,"children":["192313b8-c738-4e53-8ca9-b66f7f33f708"],"afters":[{"name":"unset","status":"passed","stage":"finished","description":"","start":1519295738833,"stop":1519295739941}]}
