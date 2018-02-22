@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class HousingPage extends BasePage {
     private final String choosingCitySelector = "//*[text()='%s']/..";
     WebElement city;
@@ -17,6 +19,8 @@ public class HousingPage extends BasePage {
     private WebElement cityName;
     @FindBy(css = ".ui-menu__item:first-child")
     private WebElement firstHousing;
+    @FindBy(css = ".ui-link.ui-menu__link.ui-menu__link_logo .ui-link__text")
+    private List<WebElement> listOfHousings;
 
     public boolean isCityNameSameAs(ExpectedCitiesData expectedCity) {
         return isPresent(cityName) && cityName.getText().equals(expectedCity.getOfCity());
@@ -48,7 +52,17 @@ public class HousingPage extends BasePage {
     }
 
     public void clickCityName() {
-        if (isPresent(cityName))
-            cityName.click();
+        if (isPresent(cityName)) {
+            if (cityName.isEnabled())
+                cityName.click();
+        }
+    }
+
+    public boolean isHousingExist(HousingsData housing) {
+        for (WebElement element : listOfHousings) {
+            if (element.getText().equals(housing.getHousing()))
+                return true;
+        }
+        return false;
     }
 }

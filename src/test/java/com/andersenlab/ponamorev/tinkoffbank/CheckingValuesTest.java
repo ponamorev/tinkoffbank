@@ -162,7 +162,7 @@ public class CheckingValuesTest extends BaseTest {
         payHousingInMoscowSteps.errorMessageAboutMaxValueShouldBeCorrect();
     }
 
-    @Test(priority = 1, groups = "main_group")
+    @Test(groups = "main_group")
     public void checking_valid_values_test() {
         payHousingInMoscowSteps.payerCodeFieldShouldBeEnabled();
         payHousingInMoscowSteps.clearPayerCodeField();

@@ -5,6 +5,7 @@ import com.andersenlab.ponamorev.tinkoffbank.data.HousingsData;
 import com.andersenlab.ponamorev.tinkoffbank.pages.HousingPage;
 import io.qameta.allure.Step;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class HousingSteps extends BaseSteps {
@@ -65,5 +66,13 @@ public class HousingSteps extends BaseSteps {
     @Step("Ожидается, пока страница не загрузится")
     public void waitUntilPageIsLoaded() {
         housingPage.waitUntilPageIsLoaded(housingPage);
+    }
+
+    @Step("Проверяется, присутствует ли организация в списке")
+    public void checkingOrganisationExisting(HousingsData housing) {
+        boolean result = housingPage.isHousingExist(housing);
+        if (result)
+            assertTrue(true, "Организация присутствует в списке");
+        else assertFalse(false, "Орагнизация не присутствует в списке");
     }
 }

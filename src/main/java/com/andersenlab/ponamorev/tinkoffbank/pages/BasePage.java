@@ -13,10 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BasePage {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
     String defaultUrl = "https://www.tinkoff.ru";
 
-    @FindBy(css = "#mainMenu .HeaderMenuItem__item_2v2UK *[href='/payments/']")
+    @FindBy(css = "#mainMenu *[data-qa-file='MenuItem'] *[href='/payments/']")
     private WebElement paymentsButton;
 
     private void initPageElements(WebDriver driver, BasePage page) {

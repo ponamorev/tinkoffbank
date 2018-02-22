@@ -1,10 +1,10 @@
 package com.andersenlab.ponamorev.tinkoffbank.steps;
 
+import com.andersenlab.ponamorev.tinkoffbank.BaseTest;
 import com.andersenlab.ponamorev.tinkoffbank.data.AccordingErrorMessageByNumber;
 import com.andersenlab.ponamorev.tinkoffbank.pages.PayHousingInMoscowPage;
 import io.qameta.allure.Step;
 
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class PayHousingInMoscowSteps extends BaseSteps {
@@ -82,7 +82,7 @@ public class PayHousingInMoscowSteps extends BaseSteps {
 
     @Step("Проверяется, что под полем <{0}> не отображается сообщение об ошибке")
     public void errorMessageShouldNotBeDisplayed(AccordingErrorMessageByNumber message) {
-        assertFalse(payHousingInMoscowPage.isErrorMessageDisplayed(message),
+        assertTrue(payHousingInMoscowPage.isErrorMessageNotDisplayed(message),
                 "Сообщение об ошибке под полем <{0}> отображается");
     }
 
@@ -135,7 +135,14 @@ public class PayHousingInMoscowSteps extends BaseSteps {
                 "Кнопка <Платежи> не доступна");
     }
 
-    public PayHousingInMoscowPage getPayHousingInMoscowPage() {
-        return payHousingInMoscowPage;
+    @Step("Сравнивается сохраненный объект страницы с текущим")
+    public void currentPageShouldBeSameAsSaved() {
+        assertTrue(payHousingInMoscowPage.getSavedPageInstance().equals(BaseTest.driver.getCurrentUrl()),
+                "Страницы не совпадают");
+    }
+
+    @Step("Записывается объект страницы")
+    public void writeDownPageInstance() {
+        payHousingInMoscowPage.savePageInstance();
     }
 }

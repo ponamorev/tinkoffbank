@@ -2,13 +2,11 @@ package com.andersenlab.ponamorev.tinkoffbank;
 
 import com.andersenlab.ponamorev.tinkoffbank.data.ExpectedCitiesData;
 import com.andersenlab.ponamorev.tinkoffbank.data.HousingsData;
-import com.andersenlab.ponamorev.tinkoffbank.pages.PayHousingInMoscowPage;
 import com.andersenlab.ponamorev.tinkoffbank.steps.*;
 import org.testng.annotations.Test;
 
 public class TinkoffBankChoosingHousingTest extends BaseTest {
     static String housingName;
-    static PayHousingInMoscowPage savingPage;
 
     BaseSteps baseSteps = new BaseSteps();
     PaymentsSteps paymentsSteps = new PaymentsSteps();
@@ -37,6 +35,6 @@ public class TinkoffBankChoosingHousingTest extends BaseTest {
         housingInMoscowSteps.clickPayHousingInMoscow();
 
         payHousingInMoscowSteps.waitUntilPageIsLoaded();
-        savingPage = payHousingInMoscowSteps.getPayHousingInMoscowPage();
+        payHousingInMoscowSteps.writeDownPageInstance();
     }
 }

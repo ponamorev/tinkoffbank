@@ -12,7 +12,7 @@ public class PaymentsPage extends BasePage {
     private WebElement firstElementFromDropDownList;
 
     public boolean isHousingEnabled() {
-        return housing.isEnabled();
+        return isPresent(housing) && housing.isEnabled();
     }
 
     public void clickHousing() {
@@ -20,7 +20,7 @@ public class PaymentsPage extends BasePage {
     }
 
     public boolean isSearchInputFieldEnabled() {
-        return searchInput.isEnabled();
+        return isPresent(searchInput) && searchInput.isEnabled();
     }
 
     public void enterSearchString(String searchString) {
@@ -28,7 +28,7 @@ public class PaymentsPage extends BasePage {
     }
 
     public boolean isFirstElementFromListEnabled() {
-        return firstElementFromDropDownList.isEnabled();
+        return isPresent(firstElementFromDropDownList) && firstElementFromDropDownList.isEnabled();
     }
 
     public String getTextFirstElementFromList() {
