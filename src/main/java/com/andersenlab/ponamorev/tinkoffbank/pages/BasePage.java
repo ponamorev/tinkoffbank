@@ -16,7 +16,7 @@ public class BasePage {
     private static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
     String defaultUrl = "https://www.tinkoff.ru";
 
-    @FindBy(css = "*[href='/payments/'] *[data-qa-file='MenuItem']")
+    @FindBy(css = "#mainMenu .HeaderMenuItem__item_2v2UK *[href='/payments/']")
     private WebElement paymentsButton;
 
     private void initPageElements(WebDriver driver, BasePage page) {

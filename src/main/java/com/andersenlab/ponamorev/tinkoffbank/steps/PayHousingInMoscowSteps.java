@@ -123,4 +123,19 @@ public class PayHousingInMoscowSteps extends BaseSteps {
     public void openBasePage() {
         payHousingInMoscowPage.open();
     }
+
+    @Step("Нажимается кнопка <Платежи>")
+    public void clickPaymentsButton() {
+        payHousingInMoscowPage.clickPaymentsButton();
+    }
+
+    @Step("Проверяется, что кнопка <Платежи> доступна")
+    public void paymentsButtonShouldBeEnabled() {
+        assertTrue(payHousingInMoscowPage.isPaymentsButtonEnabled(),
+                "Кнопка <Платежи> не доступна");
+    }
+
+    public PayHousingInMoscowPage getPayHousingInMoscowPage() {
+        return payHousingInMoscowPage;
+    }
 }
