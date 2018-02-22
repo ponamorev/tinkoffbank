@@ -6,14 +6,23 @@ import com.andersenlab.ponamorev.tinkoffbank.steps.HousingInMoscowSteps;
 import com.andersenlab.ponamorev.tinkoffbank.steps.HousingSteps;
 import com.andersenlab.ponamorev.tinkoffbank.steps.PayHousingInMoscowSteps;
 import com.andersenlab.ponamorev.tinkoffbank.steps.PaymentsSteps;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TinkoffBankChangingCityTest {
+    private final String defaultUrl = "https://www.tinkoff.ru/zhku-moskva/oplata/?tab=pay";
+
     PaymentsSteps paymentsSteps = new PaymentsSteps();
     HousingInMoscowSteps housingInMoscowSteps = new HousingInMoscowSteps();
     PayHousingInMoscowSteps payHousingInMoscowSteps = new PayHousingInMoscowSteps();
     HousingSteps housingSteps = new HousingSteps();
 
+
+    @BeforeMethod
+    public void set() {
+        if (!BaseTest.driver.getCurrentUrl().equals(defaultUrl))
+            payHousingInMoscowSteps.openBasePage();
+    }
 
     @Test(groups = "main_group")
     public void tinkoff_bank_change_city_test() {

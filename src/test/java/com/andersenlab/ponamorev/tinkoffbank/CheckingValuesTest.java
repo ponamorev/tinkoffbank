@@ -8,6 +8,7 @@ public class CheckingValuesTest extends BaseTest {
     private final String validPayerCode = "1234567890";
     private final String validPeriod = "122017";
     private final String validSum = "5000";
+    private final String defaultUrl = "https://www.tinkoff.ru/zhku-moskva/oplata/?tab=pay";
 
     PayHousingInMoscowSteps payHousingInMoscowSteps = new PayHousingInMoscowSteps();
 
@@ -76,6 +77,8 @@ public class CheckingValuesTest extends BaseTest {
 
     @BeforeMethod
     public void waitPageLoading() {
+        if (!BaseTest.driver.getCurrentUrl().equals(defaultUrl))
+            payHousingInMoscowSteps.openBasePage();
         payHousingInMoscowSteps.waitUntilPageIsLoaded();
     }
 

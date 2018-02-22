@@ -44,10 +44,10 @@ public class PaymentsSteps extends BaseSteps {
                 "Первый элемент в выпадающем списке не доступен");
     }
 
-    @Step("Сравнивается название организации в первом элементе списка с <{0}>")
+    @Step("Сравнивается название организации в первом элементе списка с <{name}>")
     public void organisationNameShouldBeSameAs(String name) {
         assertEquals(name, paymentsPage.getTextFirstElementFromList(),
-                "Название организации из первого элемента не совпадает с <{0}>");
+                "Название организации из первого элемента не совпадает с <{name}>");
     }
 
     @Step("Нажимается первый элемент из выпадающего списка")

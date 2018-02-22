@@ -12,10 +12,10 @@ public class HousingSteps extends BaseSteps {
 
     HousingPage housingPage = new HousingPage();
 
-    @Step("Название города должно быть <{0}>")
+    @Step("Название города должно быть <{expectedCity.getOfCity}>")
     private void cityNameShouldBeSameAs(ExpectedCitiesData expectedCity) {
         assertTrue(housingPage.isCityNameSameAs(expectedCity),
-                "Название города не совпадает с <{0}>");
+                "Название города не совпадает с <{expectedCity.getOfCity}>");
     }
 
     @Step("Проверяется город")
@@ -35,16 +35,16 @@ public class HousingSteps extends BaseSteps {
         housingPage.clickChosenCity();
     }
 
-    @Step("Проверяется, что город <{0}> доступен")
+    @Step("Проверяется, что город <{expectedCity.getCity}> доступен")
     private void cityShouldBeEnabled(ExpectedCitiesData expectedCity) {
         assertTrue(housingPage.isChosenCityEnabled(expectedCity),
-                "Город <{0}> не доступен");
+                "Город <{expectedCity.getCity}> не доступен");
     }
 
-    @Step("Проверяется, что имя первой организации в списке <{0}>")
+    @Step("Проверяется, что имя первой организации в списке <{housing}>")
     public void firstHousingShouldBeSameAs(HousingsData housing) {
         assertTrue(housingPage.isFirstHousingSameAs(housing),
-                "Имя первой организации не <{0}>");
+                "Имя первой организации не <{housing}>");
     }
 
     @Step("Получить название первой организации в списке")

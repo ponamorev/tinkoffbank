@@ -74,28 +74,28 @@ public class PayHousingInMoscowSteps extends BaseSteps {
         payHousingInMoscowPage.clickSubmit();
     }
 
-    @Step("Проверяется, что под полем <{0}> отображается сообщение об ошибке")
+    @Step("Проверяется, что под полем <{message}> отображается сообщение об ошибке")
     public void errorMessageShouldBeDisplayed(AccordingErrorMessageByNumber message) {
         assertTrue(payHousingInMoscowPage.isErrorMessageDisplayed(message),
-                "Сообщение об ошибке под полем <{0}> не отображается");
+                "Сообщение об ошибке под полем <{message}> не отображается");
     }
 
-    @Step("Проверяется, что под полем <{0}> не отображается сообщение об ошибке")
+    @Step("Проверяется, что под полем <{message}> не отображается сообщение об ошибке")
     public void errorMessageShouldNotBeDisplayed(AccordingErrorMessageByNumber message) {
         assertTrue(payHousingInMoscowPage.isErrorMessageNotDisplayed(message),
-                "Сообщение об ошибке под полем <{0}> отображается");
+                "Сообщение об ошибке под полем <{message}> отображается");
     }
 
-    @Step("Проверяется, что под полем <{0}> отображается сообщение о некорректном вводе данных")
+    @Step("Проверяется, что под полем <{message.getInvalidValueMessage()}> отображается сообщение о некорректном вводе данных")
     public void errorMessageAboutInvalidDataShouldBeCorrect(AccordingErrorMessageByNumber message) {
         assertTrue(payHousingInMoscowPage.isErrorMessageCorrect(message),
-                "Сообщение о некорректном вводе данных под полем <{0}> не отображается");
+                "Сообщение о некорректном вводе данных под полем <{message.getInvalidValueMessage()}> не отображается");
     }
 
-    @Step("Проверяется, что под полем <{0}> отображается сообщение о пустом обязательном поле")
+    @Step("Проверяется, что под полем <{message.getEmptyFieldMessage()}> отображается сообщение о пустом обязательном поле")
     public void errorMessageAboutEmptyFieldShouldBeCorrect(AccordingErrorMessageByNumber message) {
         assertTrue(payHousingInMoscowPage.isErrorMessageAboutEmptyFieldCorrect(message),
-                "Сообщение о пустом обязательном поле под полем <{0}> не отображается");
+                "Сообщение о пустом обязательном поле под полем <{message.getEmptyFieldMessage()}> не отображается");
     }
 
     @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о минимальной сумме перевода")
