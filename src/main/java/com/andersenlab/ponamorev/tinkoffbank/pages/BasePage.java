@@ -7,12 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BasePage {
-    private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
     String defaultUrl = "https://www.tinkoff.ru";
 
     @FindBy(css = "*[href='/payments/'] *[data-qa-file='MenuItem']")
@@ -28,7 +29,7 @@ public class BasePage {
         try {
             new WebDriverWait(BaseTest.driver, 5).until(pageReadyStateIsCompleted);
         } catch (Exception e) {
-            logger.error(String.format("Страница \"%s\" не загрузилась", BaseTest.driver.getTitle()));
+            LOGGER.error(String.format("Страница \"%s\" не загрузилась", BaseTest.driver.getTitle()));
         }
         initPageElements(BaseTest.driver, page);
     }
@@ -45,9 +46,18 @@ public class BasePage {
         BaseTest.driver.get(defaultUrl);
     }
 
-    void waitUntilElementIsPresentAndVisible(WebElement element) {
-        if (!element.isDisplayed()) {
-
+    boolean isPresent(WebElement element) {
+        try {
+            for (int i = 0; i < 5; i++) {
+                new WebDriverWait(BaseTest.driver, 1).until(
+                        ExpectedConditions.visibilityOf(element));
+                if (element.isDisplayed()) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            return false;
         }
+        return false;
     }
 }

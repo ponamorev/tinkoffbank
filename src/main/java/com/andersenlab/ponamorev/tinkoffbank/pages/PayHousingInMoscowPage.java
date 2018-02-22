@@ -9,16 +9,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PayHousingInMoscowPage extends BasePage {
-    /*private String errorMessageCss = "%s *[data-qa-file='UIFormRowError']";*/
-    private String messageAboutMinValue = "Минимальная сумма перевода - 10 \u20BD";
-    private String messageAboutMaxValue = "Максимальная сумма перевода - 15 000 \u20BD";
-    /*private WebElement errorMessage;*/
+    private String messageAboutMinValue = "Минимальная сумма перевода — 10 \u20BD";
+    private String messageAboutMaxValue = "Максимальная сумма перевода — 15 000 \u20BD";
+    private final String defaultUrl = "https://www.tinkoff.ru/zhku-moskva/oplata/?tab=pay";
 
     @FindBy(name = "provider-payerCode")
     private WebElement payerCodeField;
     @FindBy(id = "period")
     private WebElement periodField;
-    @FindBy(css = ".Input__wrapper_1A9vy:last-child *[type='text']")
+    @FindBy(css = "*[class='Input__value_2Kx90'] *[type='text']")
     private WebElement sumField;
     @FindBy(css = ".ui-button.ui-button_failure")
     private WebElement submitButton;
@@ -30,7 +29,11 @@ public class PayHousingInMoscowPage extends BasePage {
     private WebElement sumErrorMessage;
 
     public boolean isPayerCodeFieldEnabled() {
-        return payerCodeField.isEnabled();
+        if (isPresent(payerCodeField)){
+            new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.elementToBeClickable(payerCodeField));
+            return payerCodeField.isEnabled();
+        }
+        return false;
     }
 
     public void clearPayerCodeField() {
@@ -56,14 +59,13 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     public void clearSumField() {
-        if (!sumField.getAttribute("value").equals(""))
+        if (isPresent(sumField) && !sumField.getAttribute("value").equals(""))
             sumField.clear();
     }
 
     public void enterPayerCode(String code) {
-        PageFactory.initElements(BaseTest.driver, PayHousingInMoscowPage.class);
-        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(payerCodeField));
-        payerCodeField.sendKeys(code);
+        if (isPresent(payerCodeField))
+            payerCodeField.sendKeys(code);
     }
 
     public void enterPeriod(String period) {
@@ -99,22 +101,28 @@ public class PayHousingInMoscowPage extends BasePage {
     }
 
     public boolean isErrorMessageDisplayed(AccordingErrorMessageByNumber message) {
-        return getErrorMessageByField(message).isDisplayed();
+        return isPresent(getErrorMessageByField(message)) && getErrorMessageByField(message).isDisplayed();
     }
 
     public boolean isErrorMessageAboutMinValueCorrect() {
-        PageFactory.initElements(BaseTest.driver, PayHousingInMoscowPage.class);
-        return sumErrorMessage.getText().equals(messageAboutMinValue);
+        return isPresent(sumErrorMessage) && sumErrorMessage.getText().equals(messageAboutMinValue);
     }
 
     public boolean isErrorMessageAboutMaxValueCorrect() {
-        PageFactory.initElements(BaseTest.driver, PayHousingInMoscowPage.class);
-        /*new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf())*/
-        return sumErrorMessage.getText().equals(messageAboutMaxValue);
+        if (isPresent(sumErrorMessage)) {
+            PageFactory.initElements(BaseTest.driver, this);
+            return sumErrorMessage.getText().equals(messageAboutMaxValue);
+        }
+        return false;
     }
 
     public void clickSubmit() {
-        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(submitButton));
-        submitButton.click();
+        if (isPresent(submitButton))
+            submitButton.click();
+    }
+
+    @Override
+    public void open() {
+        BaseTest.driver.get(defaultUrl);
     }
 }

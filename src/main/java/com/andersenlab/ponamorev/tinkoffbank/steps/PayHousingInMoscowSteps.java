@@ -4,6 +4,7 @@ import com.andersenlab.ponamorev.tinkoffbank.data.AccordingErrorMessageByNumber;
 import com.andersenlab.ponamorev.tinkoffbank.pages.PayHousingInMoscowPage;
 import io.qameta.allure.Step;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class PayHousingInMoscowSteps extends BaseSteps {
@@ -79,6 +80,12 @@ public class PayHousingInMoscowSteps extends BaseSteps {
                 "Сообщение об ошибке под полем <{0}> не отображается");
     }
 
+    @Step("Проверяется, что под полем <{0}> не отображается сообщение об ошибке")
+    public void errorMessageShouldNotBeDisplayed(AccordingErrorMessageByNumber message) {
+        assertFalse(payHousingInMoscowPage.isErrorMessageDisplayed(message),
+                "Сообщение об ошибке под полем <{0}> отображается");
+    }
+
     @Step("Проверяется, что под полем <{0}> отображается сообщение о некорректном вводе данных")
     public void errorMessageAboutInvalidDataShouldBeCorrect(AccordingErrorMessageByNumber message) {
         assertTrue(payHousingInMoscowPage.isErrorMessageCorrect(message),
@@ -93,12 +100,14 @@ public class PayHousingInMoscowSteps extends BaseSteps {
 
     @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о минимальной сумме перевода")
     public void errorMessageAboutMinValueShouldBeCorrect() {
+        waitUntilPageIsLoaded();
         assertTrue(payHousingInMoscowPage.isErrorMessageAboutMinValueCorrect(),
                 "Сообщение о минимальной сумме перевода не отображается");
     }
 
     @Step("Проверяется, что под полем <Сумма платежа> отображается сообщение о максимальной сумме перевода")
     public void errorMessageAboutMaxValueShouldBeCorrect() {
+        waitUntilPageIsLoaded();
         assertTrue(payHousingInMoscowPage.isErrorMessageAboutMaxValueCorrect(),
                 "Сообщение о максимальной сумме перевода не отображается");
     }
@@ -107,5 +116,11 @@ public class PayHousingInMoscowSteps extends BaseSteps {
     @Step("Ожидается, пока страница не загрузится")
     public void waitUntilPageIsLoaded() {
         payHousingInMoscowPage.waitUntilPageIsLoaded(payHousingInMoscowPage);
+    }
+
+    @Override
+    @Step("Открывается начальная страница для выполнения валидации и верификации обязательных полей")
+    public void openBasePage() {
+        payHousingInMoscowPage.open();
     }
 }

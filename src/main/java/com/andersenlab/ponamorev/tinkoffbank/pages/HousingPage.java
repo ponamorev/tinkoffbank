@@ -19,8 +19,7 @@ public class HousingPage extends BasePage {
     private WebElement firstHousing;
 
     public boolean isCityNameSameAs(ExpectedCitiesData expectedCity) {
-        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(cityName));
-        return cityName.getText().equals(expectedCity.getOfCity());
+        return isPresent(cityName) && cityName.getText().equals(expectedCity.getOfCity());
     }
 
     public void clickChosenCity() {
@@ -29,8 +28,11 @@ public class HousingPage extends BasePage {
 
     public boolean isChosenCityEnabled(ExpectedCitiesData expectedCity) {
         city = BaseTest.driver.findElement(By.xpath(String.format(choosingCitySelector, expectedCity.getCity())));
-        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.elementToBeClickable(city));
-        return city.isEnabled();
+        if (isPresent(city)) {
+            new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.elementToBeClickable(city));
+            return city.isEnabled();
+        }
+        return false;
     }
 
     public boolean isFirstHousingSameAs(HousingsData housing) {
@@ -46,7 +48,7 @@ public class HousingPage extends BasePage {
     }
 
     public void clickCityName() {
-        new WebDriverWait(BaseTest.driver, 5).until(ExpectedConditions.visibilityOf(cityName));
-        cityName.click();
+        if (isPresent(cityName))
+            cityName.click();
     }
 }
